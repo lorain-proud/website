@@ -9,6 +9,18 @@
   </head>
 
   <body>
+    <nav>
+      <%= link_to "Projects", projects_path %>
+      <% if current_credential.present? %>
+        <%= current_credential.user.full_name %>
+      <% else %>
+        <%= link_to "Sign In", new_credential_session_path %>
+        <%= link_to "Sign Up", new_credential_registration_path %>
+      <% end %>
+    </nav>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
     <%= yield %>
   </body>
 </html>
