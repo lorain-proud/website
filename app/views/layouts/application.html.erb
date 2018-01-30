@@ -1,27 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>LorainProud</title>
-    <%= csrf_meta_tags %>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <title><%= content_for?(:title) ? yield(:title) : "#LorainProud" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
   </head>
 
   <body>
-    <nav>
-      <%= link_to "Projects", projects_path %>
-      <% if current_user.present? %>
-        <%= current_user.full_name %>
-        <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to "Sign In", new_user_session_path %>
-        <%= link_to "Sign Up", new_user_registration_path %>
-      <% end %>
+    <nav class="top-bar" data-topbar role="navagation">
+      <ul class="title-area">
+        <li class="name">
+          <h1><%= link_to "#LorainProud", root_path %></h1>
+        </li>
+      </ul>
+      <section class="top-bar-section">
+        <ul class="right">
+          <li><%= link_to "Projects", projects_path %></li>
+          <% if current_user.present? %>
+            <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+            <li><%= link_to "#{current_user.full_name}", "#" %>
+          <% else %>
+            <li><%= link_to "Sign In", new_user_session_path %></li>
+            <li><%= link_to "Sign Up", new_user_registration_path %></li>
+          <% end %>
+        </ul>
+      </section>
     </nav>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
     <%= yield %>
+    <%= javascript_include_tag "application" %>
   </body>
 </html>
