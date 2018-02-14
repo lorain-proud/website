@@ -6,20 +6,18 @@
 
     <title><%= content_for?(:title) ? yield(:title) : "#LorainProud" %></title>
 
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
     <nav class="top-bar" data-topbar role="navagation">
-      <ul class="title-area">
-        <li class="name">
-          <h1><%= link_to "#LorainProud", root_path %></h1>
-        </li>
-      </ul>
-      <section class="top-bar-section">
-        <ul class="right">
+      <div class="top-bar-left">
+        <h1><%= link_to "#LorainProud", root_path %></h1>
+      </div>
+      <div class="top-bar-right">
+        <ul class="menu horizontal">
           <li><%= link_to "Projects", projects_path %></li>
           <% if current_user.present? %>
             <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
@@ -29,9 +27,13 @@
             <li><%= link_to "Sign Up", new_user_registration_path %></li>
           <% end %>
         </ul>
-      </section>
+      </div>
     </nav>
-    <%= yield %>
-    <%= javascript_include_tag "application" %>
+
+    <div class="grid-x">
+      <div class="cell">
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>
