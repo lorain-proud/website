@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180126230145) do
+ActiveRecord::Schema.define(version: 20180214204443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "events", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "media", force: :cascade do |t|
+    t.string "mediable_type"
+    t.bigint "mediable_id"
+    t.string "type"
+    t.string "url"
+    t.string "short_description"
+    t.text "additional_information"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mediable_type", "mediable_id"], name: "index_media_on_mediable_type_and_mediable_id"
+  end
 
   create_table "pages", force: :cascade do |t|
     t.string "title"

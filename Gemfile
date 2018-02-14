@@ -40,7 +40,10 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem "trailblazer-operation"
+
 group :development, :test do
+  gem 'rspec-rails', '~> 3.7'
   gem 'pry'
   gem 'pry-rails'
   gem 'pry-byebug'
